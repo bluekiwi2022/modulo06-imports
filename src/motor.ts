@@ -1,4 +1,4 @@
-import { puntosTotales } from "./modelo";
+import { partida } from "./modelo";
 
 export const generarNumeroAleatorio = (): number => {
   return Math.ceil(Math.random() * 11);
@@ -19,7 +19,7 @@ export const obtenerPuntosCarta = (numeroCarta: number): number => {
 };
 
 export const sumarPuntos = (puntos: number): number => {
-  return puntos + puntosTotales;
+  return puntos + partida.puntosTotales;
 };
 
 export const obtenerMensajePlantado = (puntos: number): string => {
