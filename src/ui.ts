@@ -1,4 +1,4 @@
-import { puntosTotales, actualizarPuntosTotales } from "./modelo";
+import { partida, crearPartida } from "./modelo";
 
 import {
   generarNumeroAleatorio,
@@ -45,15 +45,15 @@ export const pedirCartaFlujo = (): void => {
 
   const puntosCarta = obtenerPuntosCarta(carta);
   const puntosSumados = sumarPuntos(puntosCarta);
-  actualizarPuntosTotales(puntosSumados);
-  mostrarPuntuacion(puntosTotales);
+  partida.puntosTotales = puntosSumados;
+  mostrarPuntuacion(partida.puntosTotales);
 };
 
 export const revisarPartida = (): void => {
-  if (puntosTotales === 7.5) {
+  if (partida.puntosTotales === 7.5) {
     mostrarMensaje("Enhorabuena, has ganado la partida", "gameOver");
     cambiarEstadoBotonPideCarta(true);
-  } else if (puntosTotales > 7.5) {
+  } else if (partida.puntosTotales > 7.5) {
     mostrarMensaje("Has perdido la partida", "gameOver");
     cambiarEstadoBotonPideCarta(true);
   }
@@ -65,13 +65,13 @@ export const handlePedirCartaClick = (): void => {
 };
 
 export const handlePlantoClick = (): void => {
-  const mensaje = obtenerMensajePlantado(puntosTotales);
+  const mensaje = obtenerMensajePlantado(partida.puntosTotales);
   mostrarMensaje(mensaje, "mensaje");
   cambiarEstadoBotonPideCarta(true);
 };
 
 export const handleEmpezarClick = (): void => {
-  actualizarPuntosTotales(0);
+  crearPartida();
   mostrarPuntuacion(0);
   mostrarUrlCarta("imagenes/back.jpg");
   mostrarMensaje("", "mensaje");
@@ -82,7 +82,7 @@ export const handleEmpezarClick = (): void => {
 export const handleSeguirClick = (): void => {
   pedirCartaFlujo();
   mostrarMensaje(
-    `Habrías obtenido un total de: ${puntosTotales} puntos`,
+    `Habrías obtenido un total de: ${partida.puntosTotales} puntos`,
     "mensaje",
   );
 };
